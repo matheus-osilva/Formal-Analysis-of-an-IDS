@@ -11,11 +11,11 @@ from sklearn.feature_selection import SelectKBest, f_classif
 from sklearn.preprocessing import MinMaxScaler
 from torch.utils.data import TensorDataset, DataLoader
 
-from utils import extractAllSets
-from utils import z_scale
-from utils import train_network_0
-from utils import train_network_1
-from neural_network import FFN
+from neural_networks_training.utils import extractAllSets
+from neural_networks_training.utils import z_scale
+from neural_networks_training.utils import train_network_0
+from neural_networks_training.utils import train_network_1
+from neural_networks_training.neural_network import FFN
 
 def setup_reproducibility(seed):
     random.seed(seed)
@@ -143,24 +143,8 @@ network_0 = train_network_0(splitted_data, network, optimizer, criterion, NN_FIL
 
 # Save as ONNX
 network_0.eval()
-#dummy_input = torch.randn(1, N_FEATURES)
-#final_path_0 = "/home/matheusosilva/nn_0.onnx"
 toOnnxInput = torch.as_tensor([0]*N_FEATURES).float()
-torch.onnx.export(network_0, toOnnxInput, "/home/matheusosilva/nn_0.onnx")
-# torch.onnx.export(
-# network_0,                   
-# dummy_input,                 
-# final_path_0,              
-# export_params=True,          
-# opset_version=11,            
-# do_constant_folding=True,    
-# input_names=['input'],       
-# output_names=['output'],     
-# dynamic_axes={               
-#     'input': {0: 'batch_size'},
-#     'output': {0: 'batch_size'}
-#     }
-# )
+torch.onnx.export(network_0, toOnnxInput, "onnx/nn_0.onnx")
 
 # Start the training process for neural network 1
 
@@ -196,25 +180,8 @@ network_1 = train_network_1(
 
 # Save as ONNX
 network_1.eval()
-# dummy_input = torch.randn(1, N_FEATURES)
-# final_path_1 = "/home/matheusosilva/nn_1.onnx"
-
-# torch.onnx.export(
-# network_1,                   
-# dummy_input,                 
-# final_path_1,              
-# export_params=True,          
-# opset_version=11,            
-# do_constant_folding=True,    
-# input_names=['input'],      
-# output_names=['output'],     
-# dynamic_axes={               
-#     'input': {0: 'batch_size'},
-#     'output': {0: 'batch_size'}
-#     }
-# )
 toOnnxInput_1 = torch.as_tensor([0]*N_FEATURES).float()
-torch.onnx.export(network_1, toOnnxInput_1, "/home/matheusosilva/nn_1.onnx")
+torch.onnx.export(network_1, toOnnxInput_1, "onnx/nn_1.onnx")
 
 # Set test data
 X_test_tensor = torch.from_numpy(X_test_z.to_numpy()).float()
