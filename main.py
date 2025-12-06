@@ -12,7 +12,6 @@ from sklearn.preprocessing import MinMaxScaler
 from torch.utils.data import TensorDataset, DataLoader
 
 from neural_networks_training.utils import extractAllSets
-from neural_networks_training.utils import z_scale
 from neural_networks_training.utils import train_network_0
 from neural_networks_training.utils import train_network_1
 from neural_networks_training.neural_network import FFN

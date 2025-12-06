@@ -56,29 +56,6 @@ def extractAllSets(X,y,p_train,p_val,p_test,random_state=SEED, shuffle=True):
     
     return X_train, X_val, X_test, y_train, y_val, y_test
 
-# 1.4 - z-scaling
-
-def z_scale(X_train, X_val, X_test):
-    """
-    Perform z-scaling (standardization) on the selected features.
-
-    Parameters:
-    - X_train (pd.DataFrame): Training data with all features.
-    - X_val   (pd.DataFrame): Validation data with all features.
-    - X_test  (pd.DataFrame): Test data with all features.
-
-    Returns:
-    - Tuple of pd.DataFrame: Scaled training, validation, and test data.
-    """
-    scaler = StandardScaler()
-    X_train_scaled = pd.DataFrame(scaler.fit_transform(X_train), 
-                                  columns=X_train.columns)
-    X_val_scaled   = pd.DataFrame(scaler.transform(X_val), 
-                                  columns=X_val.columns)
-    X_test_scaled  = pd.DataFrame(scaler.transform(X_test), 
-                                  columns=X_test.columns)
-    
-    return X_train_scaled, X_val_scaled, X_test_scaled
 
 def calculate_accuracy(y_true, y_pred):
     """
