@@ -106,12 +106,8 @@ selected_column_names = X.columns[selected_features_mask]
 print(selected_column_names)
 
 # Extract all sets with percentages: 80-15-05 (%)
-X_train, X_val, X_test, y_train, y_val, y_test = extractAllSets(X_new_df,y,0.80,0.15,0.5,SEED)
+X_train, X_val, X_test, y_train, y_val, y_test = extractAllSets(X_new_df,y,0.80,0.15,0.05,SEED)
 
-# Extract scaled sets
-X_train_z, X_val_z, X_test_z = z_scale(X_train, X_val, X_test)
-# Organize all sets in list format
-scaled_data = [X_train_z, X_val_z, X_test_z, y_train, y_val, y_test]
 # Organize all sets in list format
 original_data = [X_train, X_val, X_test, y_train, y_val, y_test]
 
@@ -184,7 +180,7 @@ toOnnxInput_1 = torch.as_tensor([0]*N_FEATURES).float()
 torch.onnx.export(network_1, toOnnxInput_1, "onnx/nn_1.onnx")
 
 # Set test data
-X_test_tensor = torch.from_numpy(X_test_z.to_numpy()).float()
+X_test_tensor = torch.from_numpy(X_test.to_numpy()).float()
 y_test_tensor = torch.from_numpy(y_test.to_numpy()).long().squeeze()
 
 network_0.eval()
@@ -212,5 +208,5 @@ y_test_numpy = y_test_tensor.numpy()
 acc = accuracy_score(y_test_numpy, preds_numpy)
 print(f"Accuracy Score in Test Set for neural network 1: {acc * 100:.2f}%")
 
-print("\nClassification Report for neural network 0:")
+print("\nClassification Report for neural network 1:")
 print(classification_report(y_test_numpy, preds_numpy))
