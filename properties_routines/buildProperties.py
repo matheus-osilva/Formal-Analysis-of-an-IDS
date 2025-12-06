@@ -1,13 +1,13 @@
-'''
-Creates a single file with all formulas phi, and the modsat set phi in a sketch format to build
-properties to use in solvers
-Note: this code should only be used when the modsat representation has modsat sets phi equal for every McNaughton function
-'''
-
 import re
 from pathlib import Path
 
 def build_masterfile():
+    '''
+    Creates a single file with all formulas phi, and the modsat set phi in a sketch format to build
+    properties to use in solvers
+    Note: this code should only be used when the modsat representation has modsat sets phi equal for every McNaughton function
+    '''
+
     folder_list = ['./limodsat/nn_0', './limodsat/nn_1']
     j = -1
     for folder in folder_list:

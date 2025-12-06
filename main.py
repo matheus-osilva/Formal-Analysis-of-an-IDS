@@ -192,20 +192,26 @@ with torch.no_grad():
     predictions_0 = torch.argmax(logits_0, dim=1)
     predictions_1 = torch.argmax(logits_1, dim=1)
 
+# --- NEURAL NETWORK 0 ---
 preds_numpy = predictions_0.numpy()
 y_test_numpy = y_test_tensor.numpy()
 
 acc = accuracy_score(y_test_numpy, preds_numpy)
-print(f"Accuracy Score in Test Set for neural network 0: {acc * 100:.2f}%")
+
+print(f"Accuracy Score in Test Set for neural network 0: {acc * 100:.4f}%")
 
 print("\nClassification Report for neural network 0:")
-print(classification_report(y_test_numpy, preds_numpy))
 
+print(classification_report(y_test_numpy, preds_numpy, digits=4))
+
+# --- NEURAL NETWORK 1 ---
 preds_numpy = predictions_1.numpy()
 y_test_numpy = y_test_tensor.numpy()
 
 acc = accuracy_score(y_test_numpy, preds_numpy)
-print(f"Accuracy Score in Test Set for neural network 1: {acc * 100:.2f}%")
+
+print(f"Accuracy Score in Test Set for neural network 1: {acc * 100:.4f}%")
 
 print("\nClassification Report for neural network 1:")
-print(classification_report(y_test_numpy, preds_numpy))
+
+print(classification_report(y_test_numpy, preds_numpy, digits=4))
