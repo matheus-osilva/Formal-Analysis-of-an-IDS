@@ -219,7 +219,7 @@ def get_max_var_from_text(content):
     all_numbers = [int(num) for num in re.findall(r'\d+', content)]
     return max(all_numbers) if all_numbers else 0
 
-def apply_robustness_transformation(a, b):
+def accessibility_constant(a, b):
     # Ensure b is at least 1 to avoid negative repetition counts
     if b < 1:
         raise ValueError("Parameter 'b' must be greater than or equal to 1.")
@@ -324,4 +324,4 @@ neuron_is_outputed(15, "nn_0_master.limodsat", "nn_0")
 neuron_is_outputed(15, "nn_1_master.limodsat", "nn_1")
 neuron_is_outputed_with_certainty(15, "nn_0_master.limodsat", "nn_0")
 neuron_is_outputed_with_certainty(15, "nn_1_master.limodsat", "nn_1")
-apply_robustness_transformation(7, 10)
+accessibility_constant(7, 10)
